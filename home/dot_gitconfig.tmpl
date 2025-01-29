@@ -1,0 +1,24 @@
+[core]
+	editor = vim
+	pager = delta
+
+[interactive]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-interactivediffFilter
+	diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+	line-numbers = true
+	side-by-side = true
+
+[color]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-colorui
+	ui = true
+
+[merge]
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeconflictStyle
+    conflictstyle = zdiff3
+
+[user]
+	name = arko
+	email = {{ .gitEmail | quote }}
