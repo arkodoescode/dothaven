@@ -1,0 +1,11 @@
+# mattmc3/ez-compinit
+zsh-users/zsh-autosuggestions
+# zsh-users/zsh-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting
+# ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+# zsh-users/zsh-completions
+# romkatv/powerlevel10k
+# zsh-users/zsh-history-substring-search
+mattmc3/zfunctions
+romkatv/zsh-bench kind:path
+Aloxaf/fzf-tab

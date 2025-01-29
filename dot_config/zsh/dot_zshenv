@@ -1,0 +1,64 @@
+#!/bin/zsh
+#
+# .zshenv: Zsh environment file, loaded always.
+#
+
+export ZDOTDIR=${ZDOTDIR:-$HOME/.config/zsh}
+
+# XDG
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_SHARE_HOME=$XDG_DATA_HOME
+
+: ${__zsh_config_dir:=${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}}
+: ${__zsh_user_data_dir:=${XDG_DATA_HOME:-$HOME/.local/share}/zsh}
+: ${__zsh_cache_dir:=${XDG_CACHE_HOME:-$HOME/.cache}/zsh}
+
+# Ensure Zsh directories exist.
+() {
+  local zdir
+  for zdir in $@; do
+    [[ -d "${(P)zdir}" ]] || mkdir -p -- "${(P)zdir}"
+  done
+} __zsh_{config,user_data,cache}_dir XDG_{CONFIG,CACHE,DATA}_HOME
+
+
+#
+# Path for completion dump file
+#
+export ZSH_COMPDUMP=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump
+
+#
+# Path for zsh functions
+#
+
+export ZFUNCDIR=${ZDOTDIR}/.zfunctions
+
+
+# Make Terminal.app behave.
+# from /etc/zshrc_Apple_Terminal:
+# The save/restore mechanism as a whole can be disabled by setting an
+# environment variable (typically in `${ZDOTDIR:-$HOME}/.zshenv`):
+#
+#   SHELL_SESSIONS_DISABLE=1
+if [[ "$OSTYPE" == darwin* ]]; then
+  export SHELL_SESSIONS_DISABLE=1
+fi
+
+# bat theme
+export BAT_THEME="TwoDark"
+
+
+# Created by `pipx` on 2023-08-21 05:08:11
+export PATH="$PATH:/Users/arko/.local/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# cargo
+. "$HOME/.cargo/env"
+
+export EDITOR="code"
+
+export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
+export STARSHIP_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/starship

@@ -1,0 +1,41 @@
+#!/bin/zsh
+
+# COMPLETION STYLING
+# https://github.com/Aloxaf/fzf-tab?tab=readme-ov-file#configure
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# match all case
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# disabling default menu for fzf tab completion
+zstyle ':completion:*' menu no
+
+
+# preview directory's content with eza when completing cd/z
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'eza --tree --icons=always --color=always --level=3 $realpath'
+# NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
+zstyle ':fzf-tab:*' fzf-flags --style full --height 90% --border sharp --padding 1 \
+--input-label ' search ' \
+--color 'input-border:#996666,input-label:#ffcccc' --color 'preview-border:#9999cc,preview-label:#ccccff'
+
+#
+# Antidote
+#
+# https://github.com/mattmc3/zdotdir/blob/main/.zstyles#L10-L21
+
+: ${ANTIDOTE_HOME:=${XDG_CACHE_HOME:-$HOME/.cache}/repos}
+antidote_repo=$ANTIDOTE_HOME/mattmc3/antidote
+
+zstyle ':antidote:home' path $ANTIDOTE_HOME
+zstyle ':antidote:repo' path $antidote_repo
+zstyle ':antidote:bundle' use-friendly-names 'yes'
+zstyle ':antidote:plugin:*' defer-options '-p'
+zstyle ':antidote:*' zcompile 'yes'
+
+#
+# Completions
+#
+
+# zstyle ':plugin:ez-compinit' 'compstyle' 'ohmy'

@@ -1,0 +1,44 @@
+#!/bin/zsh
+#
+# aliases - Zsh and bash aliases
+#
+
+# eza aliases
+alias ls="eza"
+alias la="eza --color=auto --icons=always -l -a --git --no-filesize --no-time --no-user --no-permissions"
+
+# zoxide alias
+alias cd="z"
+
+# kubectl aliases
+# alias kl="kubectl"
+# alias kns="kubectl ns"
+# alias ktx="kubectl ctx"
+
+# date/time
+alias timestamp="date '+%Y-%m-%d %H:%M:%S'"
+alias datestamp="date '+%Y-%m-%d'"
+alias isodate="date +%Y-%m-%dT%H:%M:%S%z"
+alias utc="date -u +%Y-%m-%dT%H:%M:%SZ"
+alias unixepoch="date +%s"
+
+# misc
+alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
+
+# print things
+alias print-fpath='for fp in $fpath; do echo $fp; done; unset fp'
+alias print-path='echo $PATH | tr ":" "\n"'
+alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
+
+# quick navigation
+alias zdot='cd $ZDOTDIR'
+
+# history aliases
+alias hist='fc -liL'
+alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+
+
+# granted https://github.com/common-fate/granted
+alias assume=". assume"
+
+alias chez='chezmoi'

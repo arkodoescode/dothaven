@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+local fzf_command=(fzf --border --preview "bat --color=always --style=numbers --line-range=:500 {}" --preview-window=up,65%)
+fd --type f --follow --hidden --exclude .git --strip-cwd-prefix | "${fzf_command[@]}"

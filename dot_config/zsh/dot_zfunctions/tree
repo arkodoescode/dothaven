@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+local level=${1:-3}  # Set default level to 3 if no argument is provided
+eza --tree --icons=always --level="$level"

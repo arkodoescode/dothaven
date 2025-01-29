@@ -1,0 +1,25 @@
+# Appearance
+
+theme = tokyonight_night
+background-opacity = 0.9
+background-blur-radius = 20
+window-inherit-font-size = false
+font-family = "MesloLGS Nerd Font Mono"
+font-family = "SF Mono"
+font-family = "Menlo"
+font-family = "Consolas"
+font-size = 14
+window-padding-x = 2
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+
+# Behaviour
+
+window-inherit-working-directory = false
+working-directory = home
+
+# Keybinds
+
+keybind = global:cmd+grave_accent=toggle_quick_terminal

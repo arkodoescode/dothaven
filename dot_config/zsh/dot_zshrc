@@ -1,0 +1,64 @@
+#!/bin/zsh
+
+
+#
+# Homebrew
+#
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_NO_AUTO_UPDATE=
+
+#
+# Completions
+#
+
+# mattmc3/ez-compinit plugin should take care of this.
+# https://github.com/mattmc3/ez-compinit
+# Uncomment this if the the plugin is disabled.
+
+autoload -Uz compinit
+compinit -u -d $ZSH_COMPDUMP
+
+
+#
+# Zstyles
+#
+
+# Load .zstyles file with customizations.
+[[ -r ${ZDOTDIR:-$HOME}/.zstyles ]] && source ${ZDOTDIR:-$HOME}/.zstyles
+
+
+# Source anything in .zshrc.d.
+for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
+  # Ignore tilde files.
+  if [[ $_rc:t != '~'* ]]; then
+    source "$_rc"
+  fi
+done
+unset _rc
+
+
+#
+# Aliases
+#
+
+[[ -r ${ZDOTDIR:-$HOME}/.zaliases ]] && source ${ZDOTDIR:-$HOME}/.zaliases
+
+
+#
+# Wrap up
+#
+
+# Never start in the root file system.
+[[ "$PWD" != "/" ]] || cd
+
+#
+# Prompt
+#
+eval "$(starship init zsh)"
+
+
+# Always return success
+true
+

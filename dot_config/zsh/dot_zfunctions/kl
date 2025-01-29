@@ -1,0 +1,8 @@
+#!bin/zsh
+
+# export for starship prompt to pick up
+
+if [ -z "$KUBE_CONTEXT_ACTIVE" ]; then
+    export KUBE_CONTEXT_ACTIVE=true
+fi
+command kubectl "$@"
