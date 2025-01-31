@@ -1,10 +1,16 @@
+# encryption
+encryption = "age"
+
+[age]
+    identity = "~/.config/chezmoi/key.txt"
+    recipient = "age1gprzkls56fh4ytz23rzlc3e2gxcadw5fn9sztavjuvf9kvv39qks6fcfe0"
 
 # dir paths
 
 cacheDir = "{{ env "XDG_CACHE_HOME" | default (printf "%s/.cache" .chezmoi.homeDir) }}/chezmoi"
 destDir = {{ env "HOME" | quote }}
 persistentState = "{{ env "XDG_CONFIG_HOME" | default (printf "%s/.config" .chezmoi.homeDir) }}/chezmoi/chezmoi.boltdb"
-sourceDir = "{{ env "XDG_DATA_HOME" | default (printf "%s/.local/share" .chezmoi.homeDir) }}/chezmoi"
+sourceDir = "{{ env "XDG_DATA_HOME" | default (printf "%s/.local/share" .chezmoi.homeDir) }}/chezmoi/home"
 
 [edit]
     command = "code"
@@ -30,6 +36,8 @@ sourceDir = "{{ env "XDG_DATA_HOME" | default (printf "%s/.local/share" .chezmoi
 
 
 {{ $email := promptStringOnce . "gitEmail" "git email id" -}}
+{{ $isWorkMachine := promptBoolOnce . "isWorkMachine" "is this a work machine" -}}
 
 [data]
     gitEmail = {{ $email | quote }}
+    isWorkMachine = {{ $isWorkMachine }}

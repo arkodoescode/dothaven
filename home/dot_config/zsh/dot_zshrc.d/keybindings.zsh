@@ -1,4 +1,4 @@
-#!bin/zsh
+#!/bin/zsh
 
 # replace history browsing with fzf
 # bindkey '^[[B' fzf-history-widget

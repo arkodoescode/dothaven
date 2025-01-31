@@ -1,0 +1,62 @@
+#!/bin/zsh
+
+#
+# pkgd: for declaratively managing brews and casks with chezmoi on darwin
+#
+
+(( $+commands[fzf] )) || return 1
+
+local action="$1"   # 'add', 'remove', or 'show'
+local category="$2" # 'brews', 'casks', etc
+local item="$3"     # the item to add or remove, not used for 'show'
+local pkg_file="${XDG_DATA_HOME}/chezmoi/home/.chezmoidata/pkg.yaml"
+
+# Ensure the file exists
+if [[ ! -f "$pkg_file" ]]; then
+  echo "Error: '$pkg_file' does not exist."
+  return 1
+fi
+
+# Get available categories from YAML
+local categories=($(yq '.pkg.darwin | keys[]' "$pkg_file"))
+
+# Check the number of arguments and validity
+case "$action" in
+"add"|"remove")
+    if [[ -z "$category" || -z "$item" ]]; then
+        echo "Error: Both 'category' and 'item' must be specified for '$action'."
+        echo "Usage: pkgd $action <category> <item>"
+        return 1
+    elif [[ ! " ${categories[@]} " == *" $category "* ]]; then
+        echo "Error: Invalid category. Use one of: ${categories[*]}."
+        return 1
+    fi
+    ;;
+"show")
+    if [[ ! -z "$category" || ! -z "$item" ]]; then
+        echo "Error: 'show' action does not take any additional arguments."
+        echo "Usage: pkgd show"
+        return 1
+    fi
+    ;;
+*)
+    echo "Invalid action. Use 'add', 'remove', or 'show'."
+    echo "Usage: pkgd <action> [category] [item]"
+    return 1
+    ;;
+esac
+
+case "$action" in
+"add")
+    # Adds the item to the specified category and ensures uniqueness
+    yq -i ".pkg.darwin.${category} += \"${item}\" | .pkg.darwin.${category} |= unique" "$pkg_file"
+    ;;
+"remove")
+    # Removes the specified item from the category
+    yq -i "del( .pkg.darwin.${category}[] | select(. == \"${item}\") )" "$pkg_file"
+    ;;
+"show")
+    # Pretty print the YAML
+    yq --prettyPrint "$pkg_file"
+    ;;
+esac

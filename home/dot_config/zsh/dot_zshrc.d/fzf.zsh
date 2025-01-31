@@ -1,4 +1,4 @@
-#!bin/sh
+#!/bin/zsh
 
 (( $+commands[fzf] )) || return 1
 

@@ -1,4 +1,4 @@
-#!bin/zsh
+#!/bin/zsh
 
 (( $+commands[kubectl] )) || return 1
 # kubectl autocompletion

@@ -1,0 +1,20 @@
+{{- if .isWorkMachine -}}
+
+Host github-personal.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github
+
+Host github.com
+    Hostname github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_louisa_github
+
+{{- else -}}
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_github
+
+{{- end }}

@@ -1,4 +1,4 @@
-#!bin/zsh
+#!/bin/zsh
 
 (( $+commands[pyenv] )) || return 1
 export PYENV_ROOT="$HOME/.pyenv"

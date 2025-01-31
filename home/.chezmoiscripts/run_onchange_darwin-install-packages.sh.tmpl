@@ -1,0 +1,31 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+
+(( $+commands[brew] )) || return 1
+
+echo "\nInstalling brews and casks...\n"
+
+brew bundle --no-upgrade -v --file=/dev/stdin <<EOF
+{{ range .pkg.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .pkg.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+
+
+# pipx installation using zsh loop
+pipx_packages=(
+{{- range .pkg.darwin.pipx }}
+  {{ . | quote }}
+{{- end }}
+)
+
+echo "\nInstalling pipx packages...\n"
+
+for pkg in $pipx_packages; do
+  pipx install "$pkg"
+done
+
+{{ end -}}

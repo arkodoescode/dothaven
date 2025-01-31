@@ -50,7 +50,6 @@ fi
 export BAT_THEME="TwoDark"
 
 
-# Created by `pipx` on 2023-08-21 05:08:11
 export PATH="$PATH:/Users/arko/.local/bin"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -59,5 +58,5 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 export EDITOR="code"
 
-export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
+export STARSHIP_CONFIG=${XDG_CONFIG_HOME}/starship/starship.toml
 export STARSHIP_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/starship
