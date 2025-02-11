@@ -3,9 +3,19 @@
 
 (( $+commands[brew] )) || return 1
 
-echo "\nInstalling brews and casks...\n"
+echo "Tapping brew repositories...\n"
+taps=(
+{{- range .pkg.darwin.taps }}
+  {{ . | quote }}
+{{- end }}
+)
+for tap in $taps; do
+  brew tap -q "$tap"
+done
 
-brew bundle --no-upgrade -v --file=/dev/stdin <<EOF
+echo "Installing brews and casks...\n"
+
+brew bundle -q --no-upgrade -v --file=/dev/stdin <<EOF
 {{ range .pkg.darwin.brews -}}
 brew {{ . | quote }}
 {{ end -}}
@@ -17,15 +27,25 @@ EOF
 
 # pipx installation using zsh loop
 pipx_packages=(
-{{- range .pkg.darwin.pipx }}
+{{- range .pkg.darwin.pipx.packages }}
   {{ . | quote }}
 {{- end }}
 )
 
-echo "\nInstalling pipx packages...\n"
+echo "Installing pipx packages...\n"
 
 for pkg in $pipx_packages; do
-  pipx install "$pkg"
+  pipx install -q "$pkg"
 done
+
+echo "Injecting pipx packages...\n"
+
+{{- range .pkg.darwin.pipx.injections }}
+{{- range $pkg, $deps := . }}
+pipx inject -q {{ $pkg | quote }}{{- range $deps }} {{ . | quote }}{{- end }}
+{{- end }}
+{{- end }}
+
+echo "Done\n"
 
 {{ end -}}

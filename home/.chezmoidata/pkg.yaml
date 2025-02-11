@@ -1,5 +1,8 @@
 pkg:
   darwin:
+    taps:
+      - "homebrew/bundle"
+      - "common-fate/granted"
     brews:
       - "bat"
       - "chezmoi"
@@ -34,6 +37,18 @@ pkg:
       - "raycast"
       - "beekeeper-studio"
       - "httpie"
+      - "font-meslo-lg-nerd-font"
+      - "font-jetbrains-mono-nerd-font"
+      - "obsidian"
+      - "box-drive"
+      - "pycharm-ce"
+      - "zoom"
+      - "monitorcontrol"
     pipx:
-      - "poetry"
-      - "uv"
+      packages:
+        - "poetry"
+        - "uv"
+      injections:
+        - poetry:
+            - "poetry-plugin-export"
+
