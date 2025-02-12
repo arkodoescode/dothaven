@@ -9,8 +9,8 @@ taps=(
   {{ . | quote }}
 {{- end }}
 )
-for tap in $taps; do
-  brew tap -q "$tap"
+for tap in "$taps[@]"; do
+  brew tap $tap
 done
 
 echo "Installing brews and casks...\n"
@@ -24,28 +24,25 @@ cask {{ . | quote }}
 {{ end -}}
 EOF
 
+# mise tools
 
-# pipx installation using zsh loop
-pipx_packages=(
-{{- range .pkg.darwin.pipx.packages }}
+echo "\nInstalling mise tools...\n"
+
+mise install {{ range .pkg.darwin.mise }}{{ . }} {{ end }}
+
+
+uv_tools=(
+{{- range .pkg.darwin.uvTools }}
   {{ . | quote }}
 {{- end }}
 )
 
-echo "Installing pipx packages...\n"
+echo "\nInstalling uv tools...\n"
 
-for pkg in $pipx_packages; do
-  pipx install -q "$pkg"
+for pkg in "${uv_tools[@]}"; do
+  eval "uv tool install $pkg"
 done
 
-echo "Injecting pipx packages...\n"
-
-{{- range .pkg.darwin.pipx.injections }}
-{{- range $pkg, $deps := . }}
-pipx inject -q {{ $pkg | quote }}{{- range $deps }} {{ . | quote }}{{- end }}
-{{- end }}
-{{- end }}
-
-echo "Done\n"
+echo "\nDone\n"
 
 {{ end -}}

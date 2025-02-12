@@ -1,0 +1,9 @@
+# Lowest precedence. Tools defined in $HOME/.config/mise/config.toml will override these.
+# This is meant to be a static starter config that is managed by chezmoi.
+# https://mise.jdx.dev/configuration.html
+
+[tools]
+helm = "3.17.0"
+python = "3.12"
+terraform = "1.8.3"
+terragrunt = "0.53.2"

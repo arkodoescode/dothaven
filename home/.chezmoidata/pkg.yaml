@@ -14,14 +14,13 @@ pkg:
       - "granted"
       - "grpcurl"
       - "kubectl"
-      - "helm"
+      - "uv"
       - "jq"
       - "yq"
       - "pigz"
-      - "pipx"
-      - "pyenv"
       - "starship"
       - "age"
+      - "mise"
     casks:
       - "alt-tab"
       - "insomnia"
@@ -44,11 +43,12 @@ pkg:
       - "pycharm-ce"
       - "zoom"
       - "monitorcontrol"
-    pipx:
-      packages:
-        - "poetry"
-        - "uv"
-      injections:
-        - poetry:
-            - "poetry-plugin-export"
-
+    mise:
+      - "helm@3.17.0"
+      - "terraform@1.8.3"
+      - "terragrunt@0.53.2"
+      - "python@3.9"
+      - "python@3.11"
+      - "python@3.12"
+    uvTools:
+      - "poetry@2.0.1 --with poetry-plugin-export"

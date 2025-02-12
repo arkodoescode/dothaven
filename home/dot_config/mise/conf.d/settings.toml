@@ -1,0 +1,6 @@
+[settings]
+cache_prune_age = "30d"
+
+
+[settings.pipx]
+uvx = true
