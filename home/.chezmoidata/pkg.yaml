@@ -14,7 +14,6 @@ pkg:
       - "granted"
       - "grpcurl"
       - "kubectl"
-      - "uv"
       - "jq"
       - "yq"
       - "pigz"
@@ -22,8 +21,9 @@ pkg:
       - "age"
       - "mise"
     casks:
+      - "google-chrome"
       - "alt-tab"
-      - "insomnia"
+      # - "insomnia"
       - "appcleaner"
       - "linearmouse"
       - "visual-studio-code"
@@ -50,5 +50,6 @@ pkg:
       - "python@3.9"
       - "python@3.11"
       - "python@3.12"
+      - "uv@0.6.2"
     uvTools:
       - "poetry@2.0.1 --with poetry-plugin-export"
