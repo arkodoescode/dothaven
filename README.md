@@ -8,10 +8,14 @@ Run this to activate brew in current shell session.
 ```sh
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
+Install chezmoi
+```sh
+brew install chezmoi
+```
 
 Run this to install the dotfiles.
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://github.com/arkodoescode/dothaven.git
+chezmoi init --apply https://github.com/arkodoescode/dothaven.git
 ```
 
 ## Post Setup
