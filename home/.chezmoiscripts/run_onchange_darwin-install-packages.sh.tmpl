@@ -30,6 +30,7 @@ echo "\nInstalling mise tools...\n"
 
 mise install {{ range .pkg.darwin.mise }}{{ . }} {{ end }}
 
+eval "$(mise activate)"
 
 uv_tools=(
 {{- range .pkg.darwin.uvTools }}

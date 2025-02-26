@@ -20,11 +20,17 @@ chezmoi init --apply https://github.com/arkodoescode/dothaven.git
 
 ## Post Setup
 
-☑︎ Login to raycast using GitHub
+- Login to Box Drive
 
-☑︎ AltTab - Shortcut 2 - Siwtching between windows of active app (opt + tab)
+- Import raycast settings from Box Drive `config/raycast/`
 
-☑︎ LinearMouse config
+- Import alt-tab settings from Box Drive `config/alt-tab/`
+
+- LinearMouse 
+    - enable reverse scrolling for external mouse
+    - set scroll by pixel (around halfway)
+    - There is a config file for reference in Box Drive `config/linearmouse/linearmouse.json` but note that it is device and vendor specific.
+
 
 ☑︎ [TinkerTool](http://www.bresink.com/osx/0TinkerTool/download.php) (for disabling dock animation and delay)
 
