@@ -15,7 +15,7 @@ done
 
 echo "Installing brews and casks...\n"
 
-brew bundle -q --no-upgrade -v --file=/dev/stdin <<EOF
+brew bundle --no-upgrade -q --file=/dev/stdin <<EOF
 {{ range .pkg.darwin.brews -}}
 brew {{ . | quote }}
 {{ end -}}
@@ -24,25 +24,6 @@ cask {{ . | quote }}
 {{ end -}}
 EOF
 
-# mise tools
-
-echo "\nInstalling mise tools...\n"
-
-mise install {{ range .pkg.darwin.mise }}{{ . }} {{ end }}
-
-eval "$(mise activate)"
-
-uv_tools=(
-{{- range .pkg.darwin.uvTools }}
-  {{ . | quote }}
-{{- end }}
-)
-
-echo "\nInstalling uv tools...\n"
-
-for pkg in "${uv_tools[@]}"; do
-  eval "uv tool install $pkg"
-done
 
 echo "\nDone\n"
 

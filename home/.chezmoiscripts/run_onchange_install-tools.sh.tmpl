@@ -1,0 +1,28 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+
+(( $+commands[mise] )) || return 1
+
+
+# mise tools
+
+echo "\nInstalling mise tools...\n"
+
+mise install {{ range .pkg.darwin.mise }}{{ . }} {{ end }}
+
+eval "$(mise activate)"
+
+
+uv_tools=(
+{{- range .pkg.darwin.uvTools }}
+  {{ . | quote }}
+{{- end }}
+)
+
+echo "\nInstalling uv tools...\n"
+
+for pkg in "${uv_tools[@]}"; do
+  eval "uv tool install $pkg"
+done
+
+{{ end -}}
